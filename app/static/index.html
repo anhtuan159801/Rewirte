@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOCX Rewrite System</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <div class="shell">
+        <section class="hero">
+          <span class="badge">Single Deploy UI</span>
+          <h1>Chinh sua DOCX dua tren bao cao tuong dong.</h1>
+          <p>
+            Upload DOCX va PDF, theo doi tien trinh rewrite, xem ket qua va tai output ngay tren
+            cung mot service Render.
+          </p>
+        </section>
+
+        <section class="panel upload-panel">
+          <div class="panel-header">
+            <div>
+              <h2>Bat dau job moi</h2>
+              <p>Can 1 file DOCX nguon va 1 file PDF bao cao.</p>
+            </div>
+            <a class="link-button" href="/docs" target="_blank" rel="noreferrer">Mo API Docs</a>
+          </div>
+
+          <div class="form-grid">
+            <label class="field">
+              <span>Tai tai lieu DOCX</span>
+              <input id="sourceDocx" type="file" accept=".docx" />
+            </label>
+            <label class="field">
+              <span>Tai bao cao PDF</span>
+              <input id="reportPdf" type="file" accept=".pdf" />
+            </label>
+          </div>
+
+          <label class="acknowledge">
+            <input id="acknowledged" type="checkbox" />
+            <span>Toi hieu rang can review lai ket qua truoc khi su dung.</span>
+          </label>
+
+          <div class="actions">
+            <button id="submitButton" class="primary-button">Bat dau xu ly</button>
+            <span id="submitStatus" class="muted"></span>
+          </div>
+          <p id="errorMessage" class="error"></p>
+        </section>
+
+        <section id="jobSection" class="panel hidden">
+          <div class="panel-header">
+            <div>
+              <h2>Trang thai job</h2>
+              <p id="jobMeta" class="muted"></p>
+            </div>
+            <span id="jobBadge" class="badge"></span>
+          </div>
+
+          <div class="progress">
+            <span id="progressBar"></span>
+          </div>
+
+          <div class="stats">
+            <div class="stat-card">
+              <strong id="totalUnits">0</strong>
+              <span>Tong units</span>
+            </div>
+            <div class="stat-card">
+              <strong id="rewrittenUnits">0</strong>
+              <span>Da rewrite</span>
+            </div>
+            <div class="stat-card">
+              <strong id="manualUnits">0</strong>
+              <span>Manual review</span>
+            </div>
+            <div class="stat-card">
+              <strong id="providerFails">0</strong>
+              <span>Provider fails</span>
+            </div>
+          </div>
+
+          <div class="grid-two">
+            <div>
+              <h3>Timeline</h3>
+              <ol id="timeline" class="timeline"></ol>
+            </div>
+            <div>
+              <h3>Tai ket qua</h3>
+              <div class="download-list">
+                <a id="downloadDocx" class="link-button disabled" href="#">revised.docx</a>
+                <a id="downloadReport" class="link-button disabled" href="#">change_report.json</a>
+              </div>
+              <p class="muted">Khi job xong, link download se duoc mo.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="reviewSection" class="panel hidden">
+          <div class="panel-header">
+            <div>
+              <h2>Review ket qua</h2>
+              <p class="muted">So sanh noi dung goc va noi dung rewrite ngay tren giao dien.</p>
+            </div>
+            <div class="toolbar">
+              <input id="searchInput" class="search-input" type="search" placeholder="Tim theo noi dung" />
+              <select id="filterSelect" class="select-input">
+                <option value="all">Tat ca</option>
+                <option value="manual">Can review</option>
+                <option value="citation">Can citation</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="unitList" class="unit-list"></div>
+        </section>
+      </div>
+    </main>
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>
